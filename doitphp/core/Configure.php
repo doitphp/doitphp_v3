@@ -1,0 +1,222 @@
+<?php
+/**
+ * doitPHP配置文件管理类
+ *
+ * @author tommy <tommy@doitphp.com>
+ * @copyright Copyright (C) 2012 www.doitphp.com All rights reserved.
+ * @link http://www.doitphp.com
+ * @license New BSD License.{@link http://www.opensource.org/licenses/bsd-license.php}
+ * @version $Id: Configure.php 1.0 2012-11-11 22:01:36Z tommy $
+ * @package core
+ * @since 1.0
+ */
+namespace doitphp\core;
+
+if (!defined('IN_DOIT')) {
+    exit();
+}
+
+abstract class Configure {
+
+    /*
+     * 网址格式
+     *
+     * @var string
+     */
+    const PATH_FORMAT = 'path';
+    const GET_FORMAT  = 'get';
+
+    /**
+     * 项目配置文件内容临时存贮数组
+     *
+     * @var array
+     */
+    private static $_config = array();
+
+    /**
+     * 应用配置文件内容存贮数组
+     *
+     * @var array
+     */
+    private static $_data = array();
+
+    /**
+     * 类方法:loadConfig()调用状态。如果调用则为true，反之为false。
+     *
+     * @var boolean
+     */
+    private static $_isStart = false;
+
+    /**
+     * 加载应用配置文件
+     *
+     * 加载应用配置文件，分析该配置文件内容，并将分析后的数据赋值给self::$_data。
+     *
+     * @access public
+     *
+     * @param string $filePath 应用配置文件路径
+     *
+     * @return boolean
+     */
+    public static function loadConfig($filePath = null) {
+
+        //判断本方法是否被调用过，如果调用过，则直接返回。
+        if (self::$_isStart == true) {
+            return true;
+        }
+
+        //获取应用配置文件内容默认值
+        $defaultSettings = self::_getDefaultSettings();
+
+        $config = array();
+        //当配置文件路径存在时
+        if ($filePath) {
+            //分析配置文件是否存在
+            if (!is_file($filePath)) {
+                Response::halt('The configuration file: ' . $filePath . ' is not found!');
+            }
+            //获取应用配置文件内容
+            include_once $filePath;
+
+            //应用配置文件内容的默认值与配置文件值进行整合
+            $config['application'] = (isset($config['application']) && is_array($config['application'])) ? $config['application'] + $defaultSettings : $defaultSettings;
+        } else {
+            $config['application'] = $defaultSettings;
+        }
+
+        self::$_data  = $config;
+        self::$_isStart = true;
+
+        return true;
+    }
+
+    /**
+     * 获取参数值
+     *
+     * 根据某参数名,获取应用配置文件的该参数的参数值
+     *
+     * @access public
+     *
+     * @param string $key 应用配置文件内容的参数名
+     *
+     * @return mixed
+     */
+    public static function get($key) {
+
+        //分析参数
+        if (!$key) {
+            return false;
+        }
+
+        if (strpos($key, '.') === false) {
+            if (!isset(self::$_data[$key])) {
+                return false;
+            }
+            return self::$_data[$key];
+        }
+
+        $keyArray = explode('.', $key);
+
+        $value = false;
+        if ($keyArray) {
+            foreach ($keyArray as $keyId=>$keyName) {
+                if ($keyId == 0) {
+                    if (!isset(self::$_data[$keyName])) {
+                        $value = false;
+                        break;
+                    }
+                    $value = self::$_data[$keyName];
+                } else {
+                    if (!isset($value[$keyName])) {
+                        $value = false;
+                        break;
+                    }
+                    $value = $value[$keyName];
+                }
+            }
+        }
+
+        return $value;
+    }
+
+    /**
+     * 获取项目配置文件内容
+     *
+     * 根据DoitPHP项目的配置文件名称，获取该项目配置文件的内容，并将该内容进行返回
+     *
+     * @access public
+     *
+     * @param string $fileName 项目配置文件名。注:不含“.php”后缀。
+     *
+     * @return array
+     */
+    public static function getConfig($fileName) {
+
+        //参数分析.
+        if (!$fileName) {
+            return false;
+        }
+
+        if (!isset(self::$_config[$fileName])) {
+            $filePath = BASE_PATH . '/config/' . $fileName . '.php';
+            //判断文件是否存在
+            if (!is_file($filePath)) {
+                Response::halt('The configuration file: ' . $fileName . '.php is not exists!');
+            }
+
+            $config = array();
+            include_once $filePath;
+            self::$_config[$fileName] = $config;
+        }
+
+        return self::$_config[$fileName];
+    }
+
+    /**
+     * 获取应用配置文件的默认值
+     *
+     * @access private
+     * @return array
+     */
+    private static function _getDefaultSettings() {
+
+        //定义变量$defaultSettings
+        $defaultSettings = array();
+
+        //设置应用目录(application)的路径
+        $defaultSettings['basePath']            = APP_ROOT . '/application';
+
+        //设置缓存目录的路径
+        $defaultSettings['cachePath']           = APP_ROOT . '/cache';
+
+        //设置日志目录的路径
+        $defaultSettings['logPath']             = APP_ROOT . '/logs';
+
+        //设置是否开启调试模式（开启后,程序运行出现错误时,显示错误信息,便于程序调试）
+        $defaultSettings['debug']               = false;
+
+        //设置日志写入功能是否开启
+        $defaultSettings['log']                 = false;
+
+        //设置路由网址的重写模式是否开启
+        $defaultSettings['rewrite']             = false;
+
+        //设置路由网址格式(path:为url路由格式；get:为标准普通url格式)
+        $defaultSettings['urlFormat']           = self::PATH_FORMAT;
+
+        //设置路由分割符
+        $defaultSettings['urlSegmentation']     = '/';
+
+        //设置默认controller及action名
+        $defaultSettings['defaultController']   = 'Index';
+        $defaultSettings['defaultAction']       = 'index';
+
+        //设置时区，默认时区为东八区(中国)时区(Asia/ShangHai)。
+        $defaultSettings['defaultTimeZone']     = 'Asia/ShangHai';
+
+        //设置视图文件的格式(php或html, 默认为php)
+        $defaultSettings['viewExt']             = '.php';
+
+        return $defaultSettings;
+    }
+}
