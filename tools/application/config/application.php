@@ -68,6 +68,7 @@ $config['adminLogin'] = array(
 //设置所要创建的应用(项目)的根目录, 注：结尾无需"/"。
 $config['webappPath'] = substr(APP_ROOT, 0, -6);
 
+//设置当前项目的数据库连接参数
 /*$config['database'] = array(
    'dsn'      => 'mysql:host=localhost;dbname=yourDbname',
    'username' => 'yourUsername',
