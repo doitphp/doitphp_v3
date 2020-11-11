@@ -129,6 +129,7 @@ class Session {
      * 删除某session的值
      *
      * @access public
+     * @param string $key session变量名
      * @return boolean
      */
     public static function delete($key) {

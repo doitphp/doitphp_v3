@@ -41,7 +41,7 @@ if (!defined('IN_DOIT')) {
  * 实例化
  *
  * 法一:
- * $memcached = new Cache_Memcached($memOptions);
+ * $memcached = new CacheMemcached($memOptions);
  *
  */
 

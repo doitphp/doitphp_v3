@@ -96,7 +96,7 @@ class Validation {
     }
 
     /**
-     * 使用正则表达式验证是滞为身份证号码(中国大陆区)
+     * 使用正则表达式验证是否为身份证号码(中国大陆区)
      *
      * @param integer $num    所要验证的身份证号码
      * @return boolean

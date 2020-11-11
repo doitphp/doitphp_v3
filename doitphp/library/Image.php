@@ -246,7 +246,7 @@ class Image {
     }
 
     /**
-     * 设置字体名称.
+     * 设置图片文字的字体名称.
      *
      * @access public
      *
@@ -268,7 +268,7 @@ class Image {
     }
 
     /**
-     * 设置字体大小.
+     * 设置图片文字的字体大小.
      *
      * @access public
      *
@@ -286,7 +286,7 @@ class Image {
     }
 
     /**
-     * 获取颜色参数.
+     * 设置图片文字的颜色参数.
      *
      * @access public
      *
@@ -382,7 +382,6 @@ class Image {
 
         return $this;
     }
-
 
     /**
      * 设置水印图片水印的坐标位置.
@@ -562,7 +561,7 @@ class Image {
     }
 
     /**
-     * 裁剪图片差生成缩略图.
+     * 裁剪图片并生成缩略图.
      *
      * @access public
      *
@@ -721,7 +720,7 @@ class Image {
      * @access public
      *
      * @param string $imageUrl    背景图片的路径
-     * @param string $destName    路径目标图片的
+     * @param string $destName    目标图片的路径(注:无须后缀名)
      *
      * @return boolean
      */

@@ -167,7 +167,7 @@ class Captcha {
     }
 
     /**
-     * 设置背景图片或水印图片的URL.
+     * 设置背景图片的URL.
      *
      * @access public
      *
@@ -243,7 +243,7 @@ class Captcha {
     }
 
     /**
-     * 获取颜色参数.
+     * 设置验证码文字的颜色参数.
      *
      * @access public
      *

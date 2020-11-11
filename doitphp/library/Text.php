@@ -30,7 +30,7 @@ class Text {
      *
      * @return string
      */
-    public static function substr($string, $start = 0, $length, $charset = "UTF8") {
+    public static function substr($string, $start = 0, $length, $charset = "utf8") {
 
         //参数分析
         if (!$string) {
@@ -43,7 +43,7 @@ class Text {
             return iconv_substr($string, $start, $length, $charset);
         }
 
-        $re['utf-8']  = "/[\x01-\x7f]|[\xc2-\xdf][\x80-\xbf]|[\xe0-\xef][\x80-\xbf]{2}|[\xf0-\xff][\x80-\xbf]{3}/";
+        $re['utf8']  = "/[\x01-\x7f]|[\xc2-\xdf][\x80-\xbf]|[\xe0-\xef][\x80-\xbf]{2}|[\xf0-\xff][\x80-\xbf]{3}/";
         $re['gb2312'] = "/[\x01-\x7f]|[\xb0-\xf7][\xa0-\xfe]/";
         $re['gbk']    = "/[\x01-\x7f]|[\x81-\xfe][\x40-\xfe]/";
         $re['big5']   = "/[\x01-\x7f]|[\x81-\xfe]([\x40-\x7e]|\xa1-\xfe])/";
