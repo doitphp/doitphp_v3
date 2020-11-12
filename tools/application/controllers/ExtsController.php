@@ -33,11 +33,11 @@ class ExtsController extends BaseController {
 			'fileData'      => $fileData,
 			'editMethodUrl' => $this->getActionUrl('edit_method'),
 			'addParamsUrl'  => $this->getActionUrl('add_params'),
-			'editParamsUrl' => $this->getActionUrl('edit_params'),			
+			'editParamsUrl' => $this->getActionUrl('edit_params'),
 		));
 
 		//display page
-		$this->display();	
+		$this->display();
 	}
 
 	/**
@@ -86,7 +86,7 @@ class ExtsController extends BaseController {
 		//分析并组装扩展引导文件内容
 		$fileContent  = "<?php\n";
 		$fileContent .= fileCreator::fileNote($fileName, $description, $author, $copyright, 'extension', $license, $link);
-		$fileContent .= "namespace extensions;\n\n";
+		$fileContent .= "namespace extensions;\n\nuse doitphp\core\Extension;\n\n";
 		$fileContent .= fileCreator::classCodeStart($extName . 'Ext', 'Extension', false);
 
 		//构造函数(类方法)
@@ -107,7 +107,7 @@ class ExtsController extends BaseController {
 							$methodCodeParams[] = $rows['name'];
 						} else {
 							$methodCodeParams[$rows['name']] = $rows['default'];
-						}						
+						}
 					}
 				}
 				$fileContent .= fileCreator::methodNote($lines['access'], $lines['type'], $methodNoteParams, $lines['description']);
@@ -122,7 +122,7 @@ class ExtsController extends BaseController {
 			$this->ajax(false, '对不起，创建扩展引导文件失败！请重新操作');
 		}
 
-		//清空扩展引导文件的内容信息存贮数据		
+		//清空扩展引导文件的内容信息存贮数据
 		$extsModel->clearData();
 
 		//保存Controller文件的文件头代码注释信息, 以备下一个文件共用
@@ -239,7 +239,7 @@ class ExtsController extends BaseController {
 		}
 
 		//handle data
-		$extsModel = $this->model('exts');	
+		$extsModel = $this->model('exts');
 		if (!$extsModel->editMethod($id, $name, $desc, $access, $type)) {
 			$errorMsg = $extsModel->getErrorInfo();
 			if(!$errorMsg){
@@ -266,7 +266,7 @@ class ExtsController extends BaseController {
 		}
 
 		//handle data
-		$extsModel = $this->model('exts');	
+		$extsModel = $this->model('exts');
 		if (!$extsModel->deleteMethod($id)) {
 			$errorMsg = $extsModel->getErrorInfo();
 			if(!$errorMsg){
@@ -383,7 +383,7 @@ class ExtsController extends BaseController {
 		}
 
 		//handle data
-		$extsModel = $this->model('exts');	
+		$extsModel = $this->model('exts');
 		if (!$extsModel->editParams($methodId, $paramId, $name, $type, $desc, $default)) {
 			$errorMsg = $extsModel->getErrorInfo();
 			if(!$errorMsg){
@@ -435,48 +435,48 @@ class ExtsController extends BaseController {
 	protected function _getSystemKeyWords() {
 
 		return array(
-			'get', 
-			'post', 
-			'request', 
-			'getCliParams', 
-			'getCookie',  
-			'setCookie', 
-			'deleteCookie', 
-			'getSession', 
-			'setSession', 
-			'deleteSession', 
-			'showMsg', 
-			'dump', 
-			'redirect', 
-			'import', 
-			'getConfig', 
-			'getBaseUrl', 
-			'createUrl', 
-			'getSelfUrl', 
-			'getActionUrl', 
-			'getAssetUrl', 
-			'getServerName', 
-			'getClientIp', 
-			'instance', 
-			'model', 
-			'ext', 
-			'ajax', 
-			'setLayout', 
-			'getView', 
-			'assign', 
-			'display',  
-			'widget', 
-			'render', 
-			'loadExtensions', 
-			'getExtName', 
-			'getExtPath', 
+			'get',
+			'post',
+			'request',
+			'getCliParams',
+			'getCookie',
+			'setCookie',
+			'deleteCookie',
+			'getSession',
+			'setSession',
+			'deleteSession',
+			'showMsg',
+			'dump',
+			'redirect',
+			'import',
+			'getConfig',
+			'getBaseUrl',
+			'createUrl',
+			'getSelfUrl',
+			'getActionUrl',
+			'getAssetUrl',
+			'getServerName',
+			'getClientIp',
+			'instance',
+			'model',
+			'ext',
+			'ajax',
+			'setLayout',
+			'getView',
+			'assign',
+			'display',
+			'widget',
+			'render',
+			'loadExtensions',
+			'getExtName',
+			'getExtPath',
 			'_getExtRoot',
-			'__construct', 
+			'__construct',
 			'__get',
 			'__set',
 			'__call',
 			'_stripSlashes',
 			'_exception',
 		);
-	}	
+	}
 }
