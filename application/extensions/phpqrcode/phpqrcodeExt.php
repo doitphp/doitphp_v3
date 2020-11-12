@@ -4,7 +4,7 @@
  *
  * @author tommy
  * @copyright Copyright (C) www.doitphp.com 2020 All rights reserved.
- * @version $Id: phpqrcodeExt.php 1.0 2020-11-13 02:16:21Z tommy $
+ * @version $Id: phpqrcodeExt.php 3.1 2020-11-13 02:16:21Z tommy $
  * @package extension
  * @since 1.0
  */

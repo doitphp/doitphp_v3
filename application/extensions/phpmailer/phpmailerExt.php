@@ -4,7 +4,7 @@
  *
  * @author tommy
  * @copyright Copyright (C) www.doitphp.com 2020 All rights reserved.
- * @version $Id: phpmailerExt.php 1.0 2020-11-13 03:33:03Z tommy $
+ * @version $Id: phpmailerExt.php 3.1 2020-11-13 03:33:03Z tommy $
  * @package extension
  * @since 1.0
  */
