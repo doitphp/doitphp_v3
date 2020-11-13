@@ -6,7 +6,7 @@
  * @link http://www.doitphp.com
  * @copyright Copyright (C) 2015 www.doitphp.com All rights reserved.
  * @license New BSD License.{@link http://www.opensource.org/licenses/bsd-license.php}
- * @version $Id: Widget.php 2.0 2012-12-16 21:45:57Z tommy <tommy@doitphp.com> $
+ * @version $Id: Widget.php 3.1 2020-05-02 21:45:57Z tommy <tommy@doitphp.com> $
  * @package core
  * @since 1.0
  */

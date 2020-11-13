@@ -8,7 +8,7 @@
  * @link http://www.doitphp.com
  * @copyright Copyright (C) 2015 www.doitphp.com All rights reserved.
  * @license New BSD License.{@link http://www.opensource.org/licenses/bsd-license.php}
- * @version $Id: Model.php 2.0 2012-12-12 21:33:45Z tommy <tommy@doitphp.com> $
+ * @version $Id: Model.php 3.1 2020-05-01 23:30:00Z tommy <tommy@doitphp.com> $
  * @package core
  * @since 1.0
  */
