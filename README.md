@@ -19,13 +19,14 @@ DoitPHP 标准版 V3.1
 		assets/		  静态文件存放目录
 		cache/		  缓存文件存放目录
 		logs/		  运行日志文件存放目录
+		tools/    doitphp tools(脚手架)
 		LICENSE               doitphp的许可证
 
 
-2.如果想更快速的开发项目代码，请另行下载DoitPHP Tools v3.0来辅助开发。
+2.如果想更快速的开发项目代码，请另行下载DoitPHP Tools v3.1来辅助开发。
 
 官方网址：
 ------------
 如果想获取更多关于DoitPHP的信息，或查看使用文档请访问官方网址。
-	
+
 	http://www.doitphp.com/
