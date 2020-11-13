@@ -1,0 +1,17 @@
+{
+    "name": "doitphp/doitphp_v3",
+    "description": "doitphp v3.1",
+    "type": "framework",
+    "keywords": ["framework","doitphp"],
+    "homepage": "http://www.doitphp.com/",
+    "license": "BSD",
+    "authors": [
+        {
+            "name": "tommy",
+            "email": "tommy@doitphp.com"
+        }
+    ],
+    "require": {
+        "php": ">=5.3.0"
+    }
+}
